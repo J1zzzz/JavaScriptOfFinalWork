@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>登录注册页面</title>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<div class="container">
+  <div class="form-box">
+    <!-- 切换按钮 -->
+    <div class="button-box">
+      <div id="btn"></div>
+      <button type="button" class="toggle-btn" onclick="login()">登录</button>
+      <button type="button" class="toggle-btn" onclick="register()">注册</button>
+    </div>
+
+    <!-- 登录表单 -->
+    <form id="login" class="input-group">
+      <input type="text" class="input-field" placeholder="用户名" required>
+      <input type="password" class="input-field" placeholder="密码" required>
+      <input type="checkbox" class="check-box"><span>记住密码</span>
+      <button type="submit" class="submit-btn">登录</button>
+    </form>
+
+    <!-- 注册表单 -->
+    <form id="register" class="input-group">
+      <input type="text" class="input-field" placeholder="用户名" required>
+      <input type="email" class="input-field" placeholder="邮箱" required>
+      <input type="password" class="input-field" placeholder="密码" required>
+      <input type="checkbox" class="check-box"><span>我同意用户协议</span>
+      <button type="submit" class="submit-btn">注册</button>
+    </form>
+  </div>
+</div>
+<script src="js/Register-Login.js"></script>
+</body>
+</html>
