@@ -68,7 +68,7 @@ loginForm.addEventListener('submit', async function(e) {
       alert('登录成功！');
 
       // 跳转到主页或其他页面
-      window.location.href = '/index.html';
+      window.location.href = '/MainStudents.html';
     } else {
       // 登录失败
       showError(this, '用户名或密码错误');

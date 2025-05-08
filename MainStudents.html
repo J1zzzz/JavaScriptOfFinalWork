@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>学生信息表</title>
+  <link rel="stylesheet" href="css/MainStudent.css">
+</head>
+<body>
+<div class="container">
+  <h2>学生信息表</h2>
+  <table id="studentTable">
+    <thead>
+    <tr>
+      <th>学号</th>
+      <th>姓名</th>
+      <th>班级</th>
+      <th>专业</th>
+      <th>学院</th>
+      <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- 学生信息将通过JavaScript动态填充 -->
+    </tbody>
+  </table>
+
+  <!-- 分页导航 -->
+  <div class="pagination">
+    <!-- 分页链接将通过JavaScript动态生成 -->
+  </div>
+
+  <div style="display: flex; justify-content: center; gap: 10px; margin-top: 20px;">
+    <button type="button" onclick="openSearchModal()">查找学生</button>
+    <button type="button" onclick="openAddModal()">增加学生</button>
+    <button type="button" onclick="openSearchClassModal()">查找同班学生</button>
+  </div>
+</div>
+
+<!-- Search Student Modal -->
+<div id="searchStudentModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeSearchModal()">&times;</span>
+    <h2>查找学生</h2>
+    <form id="searchStudentForm" method="post" action="Db-Search">
+      <input type="text" name="studentId" placeholder="Enter Student ID Or Student Name" required>
+      <button type="submit" name="action" value="search">查找</button>
+    </form>
+  </div>
+</div>
+
+<div id="searchStudentClassModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeSearchClassModal()">&times;</span>
+    <h2>查找学生</h2>
+      <select name="studentClass">
+        <option value="1">计221-1班</option>
+        <option value="2">计221-2班</option>
+        <option value="3">计222-1班</option>
+        <option value="4">计222-2班</option>
+        <option value="5">计223-1班</option>
+        <option value="6">计223-2班</option>
+        <option value="7">计228-1班</option>
+        <option value="8">计228-2班</option>
+      </select>
+      <button type="submit" name="action" value="search"onclick="searchClassStudents()" >查找</button>
+  </div>
+</div>
+
+<!-- Add Student Modal -->
+<div id="addStudentModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeAddModal()">&times;</span>
+    <h2>增加学生</h2>
+    <form id="addStudentForm" method="post" action="Db-insert">
+      <input type="text" name="studentId" placeholder="Student ID" required>
+      <input type="text" name="studentName" placeholder="Student Name" required>
+      <select name="studentClass">
+        <option value="1">计221-1班</option>
+        <option value="2">计221-2班</option>
+        <option value="3">计222-1班</option>
+        <option value="4">计222-2班</option>
+        <option value="5">计223-1班</option>
+        <option value="6">计223-2班</option>
+        <option value="7">计228-1班</option>
+        <option value="8">计228-2班</option>
+      </select>
+      <button type="submit" name="action" value="add">提交</button>
+    </form>
+  </div>
+</div>
+
+<!-- Modify Student Modal -->
+<div id="modifyStudentModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModifyModal()">&times;</span>
+    <h2>修改学生信息</h2>
+    <form id="modifyStudentForm" method="post" action="Db-update">
+      <input type="hidden" id="modifyStudentId" name="studentId">
+      <input type="text" id="modifyStudentName" name="studentName" placeholder="Student Name" required>
+      <select id="modifyStudentClass" name="studentClass">
+        <option value="1">计221-1班</option>
+        <option value="2">计221-2班</option>
+        <option value="3">计222-1班</option>
+        <option value="4">计222-2班</option>
+        <option value="5">计223-1班</option>
+        <option value="6">计223-2班</option>
+        <option value="7">计228-1班</option>
+        <option value="8">计228-2班</option>
+      </select>
+      <button type="submit" name="action" value="modify">提交</button>
+    </form>
+  </div>
+</div>
+
+<script src="js/MainStudents.js"></script>
