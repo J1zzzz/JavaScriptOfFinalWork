@@ -96,50 +96,122 @@ function showError(form, message) {
 }
 
 // 注册表单提交处理
+// 添加倒计时功能
+let countdown = 60;
+let timer = null;
+
+function startCountdown() {
+  const sendCodeBtn = document.querySelector('.send-code-btn');
+  sendCodeBtn.disabled = true;
+
+  timer = setInterval(() => {
+    if (countdown > 0) {
+      sendCodeBtn.textContent = `${countdown}秒后重试`;
+      countdown--;
+    } else {
+      clearInterval(timer);
+      sendCodeBtn.disabled = false;
+      sendCodeBtn.textContent = '发送验证码';
+      countdown = 60;
+    }
+  }, 1000);
+}
+
+// 发送验证码
+async function sendVerificationCode() {
+  const emailInput = document.querySelector('#register input[type="email"]');
+  const email = emailInput.value;
+
+  if (!email) {
+    showError(document.getElementById('register'), '请输入邮箱地址');
+    return;
+  }
+
+  if (!isValidEmail(email)) {
+    showError(document.getElementById('register'), '请输入有效的邮箱地址');
+    return;
+  }
+  console.log(email);
+
+  try {
+    const response = await fetch('http://localhost:8080/api/send-verification', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({email:email })
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+      startCountdown();
+      showSuccess(document.getElementById('register'), '验证码已发送到您的邮箱');
+    } else {
+      showError(document.getElementById('register'), data.message || '发送验证码失败');
+    }
+  } catch (error) {
+    console.error('发送验证码错误:', error);
+    showError(document.getElementById('register'), '发送验证码失败，请稍后重试');
+  }
+}
+
+// 邮箱格式验证
+function isValidEmail(email) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
+
+// 显示成功消息
+function showSuccess(element, message) {
+  const successDiv = document.createElement('div');
+  successDiv.className = 'success-message';
+  successDiv.textContent = message;
+  element.appendChild(successDiv);
+
+  setTimeout(() => {
+    successDiv.remove();
+  }, 3000);
+}
+
+// 修改注册表单提交处理
 registerForm.addEventListener('submit', async function(e) {
   e.preventDefault();
   const username = this.querySelector('input[type="text"]').value;
   const email = this.querySelector('input[type="email"]').value;
   const password = this.querySelector('input[type="password"]').value;
+  const verificationCode = this.querySelector('.verification-code').value;
 
   try {
-    // 显示加载状态
     const submitBtn = this.querySelector('.submit-btn');
-    const originalText = submitBtn.textContent;
     submitBtn.textContent = '注册中...';
     submitBtn.disabled = true;
 
-    // 发送注册请求
-    const response = await fetch('http://your-api-url/register', {
+    const response = await fetch('http://localhost:8080/api/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        username: username,
-        email: email,
-        password: password
+        user_id: username,
+        userEmail: email,
+        user_password: password,
+        verificationCode: verificationCode
       })
     });
 
     const data = await response.json();
 
-    if (response.ok) {
-      if (data.success) {
-        alert('注册成功！请登录');
-        // 切换到登录表单
-        login();
-      } else {
-        showError(this, data.message || '注册失败');
-      }
+    if (response.ok && data.success) {
+      alert('注册成功！请登录');
+      login();
     } else {
-      showError(this, data.message || '注册失败，请稍后重试');
+      showError(this, data.message || '注册失败');
     }
   } catch (error) {
     console.error('注册错误:', error);
-    showError(this, '网络错误，请检查网络连接');
+    showError(this, '注册失败，请稍后重试');
   } finally {
-    // 恢复按钮状态
     const submitBtn = this.querySelector('.submit-btn');
     submitBtn.textContent = '注册';
     submitBtn.disabled = false;

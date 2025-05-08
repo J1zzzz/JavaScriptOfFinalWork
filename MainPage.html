@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" xmlns="http://www.w3.org/1999/html">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,6 +29,10 @@
       <input type="text" class="input-field" placeholder="用户名" required>
       <input type="email" class="input-field" placeholder="邮箱" required>
       <input type="password" class="input-field" placeholder="密码" required>
+      <div class="verification-group">
+        <input type="text" class="input-field verification-code" placeholder="验证码" required>
+        <button type="button" class="send-code-btn" onclick="sendVerificationCode()">发送验证码</button>
+      </div>
       <input type="checkbox" class="check-box"><span>我同意用户协议</span>
       <button type="submit" class="submit-btn">注册</button>
     </form>

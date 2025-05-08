@@ -16,7 +16,7 @@
 
 .form-box {
   width: 380px;
-  height: 480px;
+  height: 580px;
   position: relative;
   background: #fff;
   padding: 5px;
@@ -93,11 +93,38 @@ span {
   color: #777;
   font-size: 12px;
   bottom: 68px;
-  position: absolute;
 }
 
 #login {
   left: 50px;
+}
+.verification-group {
+  display: flex;
+  gap: 10px;
+  margin: 5px 0;
+}
+
+.verification-code {
+  flex: 1;
+}
+
+.send-code-btn {
+  padding: 10px 15px;
+  background: #4481eb;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.send-code-btn:disabled {
+  background: #cccccc;
+  cursor: not-allowed;
+}
+
+.send-code-btn:hover:not(:disabled) {
+  background: #2d6ad9;
 }
 
 #register {
