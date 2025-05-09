@@ -1,6 +1,7 @@
 // 页面加载时获取学生数据
 document.addEventListener('DOMContentLoaded', function() {
   fetchStudents(1);
+  document.removeEventListener('DOMContentLoaded', arguments.callee);
 });
 
 // 获取学生数据
@@ -12,7 +13,6 @@ async function fetchStudents(page = 1) {
     }
 
     const data = await response.json();
-    console.log("data"+ data);
     // 检查返回的数据结构
     if (data.stuInfo) {
       updateTable(data.stuInfo);
@@ -181,13 +181,13 @@ async function modifyStudent(event) {
 }
 
 // 搜索学生
-async function searchStudent(event) {
+document.getElementById('searchStudentForm').addEventListener('submit', async function(event) {
   event.preventDefault();
-  const form = event.target;
-  const formData = new FormData(form);
+  const formData = new FormData(event.target);
+  console.log(formData);
 
   try {
-    const response = await fetch('api/Db-Search', {
+    const response = await fetch('http://localhost:8080/api/Db-Search', {
       method: 'POST',
       body: formData
     });
@@ -204,8 +204,7 @@ async function searchStudent(event) {
     console.error('Error:', error);
     alert('搜索失败，请稍后重试');
   }
-}
-
+});
 // 搜索同班学生
 async function searchClassStudents(event) {
   event.preventDefault();
