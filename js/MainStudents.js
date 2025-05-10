@@ -235,9 +235,41 @@ async function searchClassStudents(event) {
 function openSearchModal() {
   document.getElementById('searchStudentModal').style.display = 'block';
 }
+const studentClassSelect = document.getElementById('studentClassSelect');
+const studentClassSearchModal=document.getElementById('searchStudentClassModal');
 
-function openSearchClassModal() {
-  document.getElementById('searchStudentClassModal').style.display = 'block';
+async function openSearchClassModal(event) {
+  studentClassSearchModal.style.display='block';
+
+  event.preventDefault();
+
+  try {
+    const response = await fetch('http://localhost:8080/api/Db-ClassSearch', {
+      method: 'GET',
+    });
+
+    if (!response.ok) {
+      throw new Error('网络请求失败');
+    }
+
+    const data = await response.json();
+    console.log(data.StuClasses);
+
+    if (data.success) {
+      studentClassSelect.innerHTML = '';
+      data.StuClasses.forEach((item) => {
+        const option = document.createElement('option');
+        option.value = item.class_id;
+        option.textContent = item.class_name;
+        studentClassSelect.appendChild(option);
+      });
+    } else {
+      alert('搜索失败：' + data.message);
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    alert('搜索失败，请稍后重试');
+  }
 }
 
 function closeSearchModal() {

@@ -33,7 +33,7 @@
   <div style="display: flex; justify-content: center; gap: 10px; margin-top: 20px;">
     <button type="button" onclick="openSearchModal()">查找学生</button>
     <button type="button" onclick="openAddModal()">增加学生</button>
-    <button type="button" onclick="openSearchClassModal()">查找同班学生</button>
+    <button type="button" onclick="openSearchClassModal(event)">查找同班学生</button>
   </div>
 </div>
 
@@ -53,19 +53,15 @@
   <div class="modal-content">
     <span class="close" onclick="closeSearchClassModal()">&times;</span>
     <h2>查找学生</h2>
-      <select name="studentClass">
-        <option value="1">计221-1班</option>
-        <option value="2">计221-2班</option>
-        <option value="3">计222-1班</option>
-        <option value="4">计222-2班</option>
-        <option value="5">计223-1班</option>
-        <option value="6">计223-2班</option>
-        <option value="7">计228-1班</option>
-        <option value="8">计228-2班</option>
+    <form id="searchForm">
+      <select name="studentClass" id="studentClassSelect">
+        <!-- 班级信息将通过 JavaScript 动态填充 -->
       </select>
-      <button type="submit" name="action" value="search"onclick="searchClassStudents()" >查找</button>
+      <button type="submit">查找</button>
+    </form>
   </div>
 </div>
+
 
 <!-- Add Student Modal -->
 <div id="addStudentModal" class="modal">
