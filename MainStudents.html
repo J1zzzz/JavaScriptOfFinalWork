@@ -32,8 +32,9 @@
 
   <div style="display: flex; justify-content: center; gap: 10px; margin-top: 20px;">
     <button type="button" onclick="openSearchModal()">查找学生</button>
-    <button type="button" onclick="openAddModal()">增加学生</button>
+    <button type="button" onclick="OpenAddStudentModal(event)">增加学生</button>
     <button type="button" onclick="openSearchClassModal(event)">查找同班学生</button>
+    <button id="returnBtn" type="button" onclick="fetchStudents(1)">返回主页</button>
   </div>
 </div>
 
@@ -68,18 +69,11 @@
   <div class="modal-content">
     <span class="close" onclick="closeAddModal()">&times;</span>
     <h2>增加学生</h2>
-    <form id="addStudentForm" method="post" action="Db-insert">
-      <input type="text" name="studentId" placeholder="Student ID" required>
-      <input type="text" name="studentName" placeholder="Student Name" required>
-      <select name="studentClass">
-        <option value="1">计221-1班</option>
-        <option value="2">计221-2班</option>
-        <option value="3">计222-1班</option>
-        <option value="4">计222-2班</option>
-        <option value="5">计223-1班</option>
-        <option value="6">计223-2班</option>
-        <option value="7">计228-1班</option>
-        <option value="8">计228-2班</option>
+    <form id="addStudentForm" method="post">
+      <input type="text" name="stu_no" placeholder="Student ID" required>
+      <input type="text" name="stu_name" placeholder="Student Name" required>
+      <select name="class_id" id="studentClass">
+
       </select>
       <button type="submit" name="action" value="add">提交</button>
     </form>
@@ -91,18 +85,11 @@
   <div class="modal-content">
     <span class="close" onclick="closeModifyModal()">&times;</span>
     <h2>修改学生信息</h2>
-    <form id="modifyStudentForm" method="post" action="Db-update">
+    <form id="modifyStudentForm" >
       <input type="hidden" id="modifyStudentId" name="studentId">
       <input type="text" id="modifyStudentName" name="studentName" placeholder="Student Name" required>
       <select id="modifyStudentClass" name="studentClass">
-        <option value="1">计221-1班</option>
-        <option value="2">计221-2班</option>
-        <option value="3">计222-1班</option>
-        <option value="4">计222-2班</option>
-        <option value="5">计223-1班</option>
-        <option value="6">计223-2班</option>
-        <option value="7">计228-1班</option>
-        <option value="8">计228-2班</option>
+
       </select>
       <button type="submit" name="action" value="modify">提交</button>
     </form>

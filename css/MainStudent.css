@@ -206,5 +206,7 @@ select:focus {
 .pagination span.current {
   background-color: #4CAF50;
   color: white;
-  border-color: #4CAF50;
+  border-color: #4caf50;
 }
+
+
