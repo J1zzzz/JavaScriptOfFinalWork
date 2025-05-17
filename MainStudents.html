@@ -31,9 +31,9 @@
   </div>
 
   <div style="display: flex; justify-content: center; gap: 10px; margin-top: 20px;">
-    <button type="button" onclick="openSearchModal()">查找学生</button>
+    <button type="button" onclick="openSearchModal(event)">查找学生</button>
     <button type="button" onclick="OpenAddStudentModal(event)">增加学生</button>
-    <button type="button" onclick="openSearchClassModal(event)">查找同班学生</button>
+<!--    <button type="button" onclick="openSearchClassModal(event)">查找同班学生</button>-->
     <button id="returnBtn" type="button" onclick="fetchStudents(1)">返回主页</button>
   </div>
 </div>
@@ -44,24 +44,23 @@
     <span class="close" onclick="closeSearchModal()">&times;</span>
     <h2>查找学生</h2>
     <form id="searchStudentForm">
-      <input type="text" name="studentDetail" placeholder="Enter Student ID Or Student Name" required>
-      <button type="submit" name="action" value="search">查找</button>
+      <input type="text" id="stuNo" name="studentNo" placeholder="Enter Student ID " >
+      <input type="text" id="stuName" name="studentName" placeholder="Enter Student Name" >
+      <select name="studentClass" id="studentClasses">
+        <!-- 班级信息将通过 JavaScript 动态填充 -->
+      </select>
+      <select name="studentClass" id="studentSubjects">
+        <!-- 班级信息将通过 JavaScript 动态填充 -->
+      </select>
+      <select name="studentClass" id="studentDepartments">
+        <!-- 班级信息将通过 JavaScript 动态填充 -->
+      </select>
+
     </form>
+    <button  id="searchButton" >查找</button>
   </div>
 </div>
 
-<div id="searchStudentClassModal" class="modal">
-  <div class="modal-content">
-    <span class="close" onclick="closeSearchClassModal()">&times;</span>
-    <h2>查找学生</h2>
-    <form id="searchForm">
-      <select name="studentClass" id="studentClassSelect">
-        <!-- 班级信息将通过 JavaScript 动态填充 -->
-      </select>
-      <button type="submit">查找</button>
-    </form>
-  </div>
-</div>
 
 
 <!-- Add Student Modal -->
@@ -97,3 +96,17 @@
 </div>
 
 <script src="js/MainStudents.js"></script>
+
+
+<!--<div id="searchStudentClassModal" class="modal">-->
+<!--  <div class="modal-content">-->
+<!--    <span class="close" onclick="closeSearchClassModal()">&times;</span>-->
+<!--    <h2>查找学生</h2>-->
+<!--    <form id="searchForm">-->
+<!--      <select name="studentClass" id="studentClassSelect">-->
+<!--        &lt;!&ndash; 班级信息将通过 JavaScript 动态填充 &ndash;&gt;-->
+<!--      </select>-->
+<!--      <button type="submit">查找</button>-->
+<!--    </form>-->
+<!--  </div>-->
+<!--</div>-->
